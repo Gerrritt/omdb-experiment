@@ -11,8 +11,7 @@ movies = pd.read_csv(map_pad + r"\movies.csv")
 print("Eerste paar films:")
 print(movies.head())
 
-# We nemen alleen een subset (bijv. de eerste 20 films) om het simpel te houden
-# Dit kun je later aanpassen
+# We nemen alleen een subset (de eerste 20 films) om het simpel te houden
 subset = movies.head(20).copy()
 
 print("\nSubset van films:")
@@ -68,3 +67,4 @@ for i in range(len(titels)):
     beste_score = scores[beste_index]
 
     print(f"'{titels[i]}' lijkt het meest op '{titels[beste_index]}' (score = {beste_score:.2f})")
+
