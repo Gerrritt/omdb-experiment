@@ -14,7 +14,7 @@ print(movies.head())
 print("\nEerste paar ratings:")
 print(ratings.head())
 
-# Gemiddelde rating per film
+# Gemiddelde rating per film bereknen 
 gem_ratings = ratings.groupby("movieId")["rating"].mean().reset_index()
 # Aantal ratings per film
 aantal_ratings = ratings.groupby("movieId")["rating"].count().reset_index()
@@ -27,7 +27,7 @@ df = df.merge(aantal_ratings, on="movieId")
 print("\nData met gemiddelde rating en aantal ratings:")
 print(df.head())
 
-# Alleen films met genoeg ratings (bijv. minstens 50) – anders wordt het raar
+# Alleen films met genoeg ratings hier gekozen minimaal 50 zodat er genoeg review data is voor een realistische uitkomst
 df_k = df[df["rating_count"] >= 50].copy()
 
 print("\nData voor KMeans (minstens 50 ratings):")
@@ -36,7 +36,7 @@ print(df_k[["title", "rating", "rating_count"]].head())
 # Features voor clustering: gemiddelde rating + aantal ratings
 X = df_k[["rating", "rating_count"]]
 
-# K-means model maken (3 clusters als voorbeeld)
+# K-means model maken met 3 clustors
 kmeans = KMeans(n_clusters=3, random_state=0)
 
 # Model trainen en clusters krijgen
@@ -51,3 +51,4 @@ print(df_k[["title", "rating", "rating_count", "cluster"]].head(50).to_string(in
 # Aantal films per cluster
 print("\nAantal films per cluster:")
 print(df_k["cluster"].value_counts())
+
